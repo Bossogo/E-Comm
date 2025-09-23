@@ -1,0 +1,2 @@
+# E-Comm
+A modern e-commerce web application built with Next.js, inspired by the E-comm App Kit (Community) design. In this project I implemented a modular architecture, dynamic routing, and responsive UI components tailored for online retail experiences. It includes product listings, cart functionality, payment flows, and user account management—perfect for developers looking to prototype or launch a scalable storefront.
