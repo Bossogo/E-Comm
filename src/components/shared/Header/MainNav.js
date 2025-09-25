@@ -1,18 +1,22 @@
-import React from 'react'
-
-function MainNav() {
+export default function MainNav() {
   return (
-    <nav className="p-4 border-b border-gray-200 flex items-center justify-between">
-        <h1 className="text-lg font-bold font-poppins">E-comm</h1>
-        <ul className="flex space-x-4">
-          <li className="text-gray-600 hover:text-gray-800 cursor-pointer">Home</li>
-          <li className="text-gray-600 hover:text-gray-800 cursor-pointer">Bags</li>
-          <li className="text-gray-600 hover:text-gray-800 cursor-pointer">Sneakers</li>
-          <li className="text-gray-600 hover:text-gray-800 cursor-pointer">Belts</li>
-          <li className="text-gray-600 hover:text-gray-800 cursor-pointer">Contact</li>
-        </ul>
-      </nav>
-  )
-}
+    <nav className="w-full bg-white py-4 flex justify-between items-center">
+      <div className="flex items-center space-x-2">
+        <img src="/images/icon.png" alt="E-Comm Logo" className="w-8 h-8" />
+        <span className="text-xl font-bold font-poppins">E-comm</span>
+      </div>
 
-export default MainNav
+      <ul className="hidden md:flex space-x-8 font-medium">
+        <li className="hover:text-blue-500 cursor-pointer">HOME</li>
+        <li className="hover:text-blue-500 cursor-pointer">BAGS</li>
+        <li className="hover:text-blue-500 cursor-pointer">SNEAKERS</li>
+        <li className="hover:text-blue-500 cursor-pointer">BELT</li>
+        <li className="hover:text-blue-500 cursor-pointer">CONTACT</li>
+      </ul>
+
+      <div className="md:hidden cursor-pointer">
+        <span className="material-icons">menu</span>
+      </div>
+    </nav>
+  );
+}

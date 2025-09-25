@@ -1,25 +1,40 @@
-import React from 'react'
+import { FaUser, FaShoppingCart, FaSearch } from 'react-icons/fa';
 
-function TopBar() {
+export default function Topbar() {
   return (
-    <nav className="bg-gray-50 border-b border-gray-200 px-4 py-2">
-      <div className="flex justify-end items-center space-x-4">
-        <select className="text-sm border-none bg-transparent">
-          <option>EN</option>
-          <option>ES</option>
-          <option>FR</option>
+    <div className="w-full bg-white text-xs sm:text-sm py-2 px-4 flex justify-between items-center">
+      <div className="flex items-center space-x-3 sm:space-x-4">
+        <select className="border border-gray-300 rounded-md p-1">
+          <option value="en">EN</option>
+          <option value="es">ES</option>
+          <option value="fr">FR</option>
         </select>
-        
-        <button className="text-sm text-gray-600 hover:text-gray-800">
-          Account
+        <select className="cursor-pointer border border-gray-300 rounded-md p-1">
+          <option value="usd">USD</option>
+          <option value="eur">EUR</option>
+          <option value="gbp">GBP</option>
+        </select>
+      </div>
+
+      <div className="flex items-center space-x-4 sm:space-x-6">
+        <button className="hover:text-blue-500 hidden sm:flex items-center">
+          <FaUser className="mr-1" />
+          <span>My profile</span>
         </button>
-        
-        <button className="text-sm text-gray-600 hover:text-gray-800 relative">
-          Cart (0)
+
+        <div className="relative cursor-pointer">
+          <FaShoppingCart className="text-lg" />
+          <span className="absolute -top-1 -right-2 bg-red-500 text-white text-[10px] rounded-full px-1">
+            0
+          </span>
+        </div>
+
+        <span className="hidden sm:inline text-gray-600">$0.00</span>
+
+        <button className="hover:text-blue-500">
+          <FaSearch className="text-lg" />
         </button>
       </div>
-    </nav>
-  )
+    </div>
+  );
 }
-
-export default TopBar
