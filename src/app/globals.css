@@ -2,10 +2,10 @@
 
 @theme {
   /* Custom Colors */
-  --color-brand-blue: #40bfff;
-  --color-brand-pink: #ff4858;
-  --color-brand-light: #bcddfe;
-  --color-brand-dark: #373737;
+  --color-brand-blue: #40BFFF;
+  --color-brand-pink: #FF4858;
+  --color-brand-light: #BCDDFE;
+  --color-brand-dark: #22262A;
 }
 
 /* :root {
@@ -24,3 +24,4 @@ body {
   background: var(--background);
   color: var(--foreground);
 } */
+
