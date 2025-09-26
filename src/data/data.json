@@ -1,0 +1,114 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "John Doe",
+      "email": "john@example.com",
+      "password": "123456"
+    }
+  ],
+
+  "categories": [
+    { "id": 1, "name": "Bags", "slug": "bags" },
+    { "id": 2, "name": "Sneakers", "slug": "sneakers" },
+    { "id": 3, "name": "Belts", "slug": "belts" },
+    { "id": 4, "name": "Sunglasses", "slug": "sunglasses" }
+  ],
+
+  "products": [
+    {
+      "id": 1,
+      "title": "Nike Air Max 270 React",
+      "categoryId": 2,
+      "price": 299.43,
+      "discountPrice": 249.99,
+      "images": [
+        "/images/products/nike-air-max-270-1.png",
+        "/images/products/nike-air-max-270-2.png"
+      ],
+      "description": "Lightweight sneakers designed for comfort and speed.",
+      "stock": 50,
+      "isBestSeller": true,
+      "tags": ["hot", "flash-sale"],
+      "relatedProductIds": [2, 3]
+    },
+    {
+      "id": 2,
+      "title": "Quilted Maxi Cross Bag",
+      "categoryId": 1,
+      "price": 320.00,
+      "discountPrice": 299.43,
+      "images": ["/images/products/maxi-cross-bag.png"],
+      "description": "Stylish quilted cross bag with adjustable strap.",
+      "stock": 20,
+      "isBestSeller": false,
+      "tags": ["flash-sale"],
+      "relatedProductIds": [1]
+    },
+    {
+      "id": 3,
+      "title": "Adidas Men Running Sneakers",
+      "categoryId": 2,
+      "price": 199.99,
+      "discountPrice": 179.99,
+      "images": ["/images/products/adidas-running.png"],
+      "description": "Performance running sneakers with breathable mesh.",
+      "stock": 35,
+      "isBestSeller": true,
+      "tags": ["featured"],
+      "relatedProductIds": [1, 2]
+    }
+  ],
+
+  "flashSales": [
+    { "id": 1, "productId": 1, "discountPercent": 50, "endsAt": "2025-09-30T23:59:59Z" },
+    { "id": 2, "productId": 2, "discountPercent": 20, "endsAt": "2025-10-02T23:59:59Z" }
+  ],
+
+  "cart": [
+    {
+      "id": 1,
+      "userId": 1,
+      "productId": 1,
+      "quantity": 2
+    }
+  ],
+
+  "orders": [
+    {
+      "id": 1,
+      "userId": 1,
+      "items": [
+        { "productId": 1, "quantity": 1, "price": 299.43 },
+        { "productId": 2, "quantity": 2, "price": 299.43 }
+      ],
+      "total": 898.29,
+      "status": "pending",
+      "paymentMethod": "credit_card",
+      "shippingAddress": "123 Main Street, Lagos, Nigeria",
+      "createdAt": "2025-09-21T10:15:00Z"
+    }
+  ],
+
+  "payments": [
+    {
+      "id": 1,
+      "orderId": 1,
+      "method": "credit_card",
+      "status": "success",
+      "transactionId": "txn_123456",
+      "amount": 898.29,
+      "createdAt": "2025-09-21T10:16:00Z"
+    }
+  ],
+
+  "contacts": [
+    {
+      "id": 1,
+      "name": "Jane Smith",
+      "email": "jane@example.com",
+      "message": "I’d like to know more about your return policy.",
+      "createdAt": "2025-09-20T14:30:00Z"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+[
+  {
+    "id": 1,
+    "name": "Jane Smith",
+    "email": "jane@example.com",
+    "message": "I’d like to know more about your return policy.",
+    "createdAt": "2025-09-20T14:30:00Z"
+  }
+]

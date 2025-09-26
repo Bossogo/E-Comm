@@ -1,0 +1,4 @@
+[
+  { "id": 1, "productId": 1, "discountPercent": 50, "endsAt": "2025-09-30T23:59:59Z" },
+  { "id": 2, "productId": 2, "discountPercent": 20, "endsAt": "2025-10-02T23:59:59Z" }
+]
