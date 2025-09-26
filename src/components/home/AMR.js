@@ -24,7 +24,7 @@ export default function AMR() {
             <img
               src="/images/shoes-shoe-png-transparent-shoe-images-pluspng-17 1.png"
               alt="Adidas Running Sneakers"
-              className="absolute z-10 -top-10 lg:-top-16 right-0 w-[280px] sm:w-[350px] lg:w-[420px] drop-shadow-xl"
+              className=" z-10 -top-10 lg:-top-16 right-0 w-[280px] sm:w-[350px] lg:w-[420px] drop-shadow-xl"
             />
           </div>
         </div>

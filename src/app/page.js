@@ -1,13 +1,14 @@
-import BestSellers from "@/components/home/BestSellers";
-import HeroSection from "@/components/home/HeroSection";
-import AMR from "@/components/home/AMR";
-import GRI from "@/components/home/GRI";
-import FeaturedProducts from "@/components/home/FeaturedProducts";
-import LatestNews from "@/components/home/LatestNews";
-import SearchBar from "@/components/home/SearchBar"; 
-import Footer from "@/components/shared/Footer/Footer";
-import Header from "@/components/shared/Header";
-import Image from "next/image";
+import BestSellers from '@/components/home/BestSellers';
+import HeroSection from '@/components/home/HeroSection';
+import AMR from '@/components/home/AMR';
+import GRI from '@/components/home/GRI';
+import FeaturedProducts from '@/components/home/FeaturedProducts';
+import LatestNews from '@/components/home/LatestNews';
+import SearchBar from '@/components/home/SearchBar';
+import Footer from '@/components/shared/Footer/Footer';
+import Header from '@/components/shared/Header';
+import Index from '@/components/signedIn';
+import Image from 'next/image';
 
 export default function Home() {
   return (
@@ -32,6 +33,7 @@ export default function Home() {
         <SearchBar />
       </main>
       <Footer />
+      <Index />
     </>
   );
 }

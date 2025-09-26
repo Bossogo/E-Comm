@@ -59,6 +59,7 @@ function BestSellers() {
       oldPrice: 534.33,
       discount: 24,
       price: 299.43,
+      isHot: true,
     },
     {
       id: 4,
