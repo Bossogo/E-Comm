@@ -7,8 +7,6 @@ import LatestNews from '@/components/home/LatestNews';
 import SearchBar from '@/components/home/SearchBar';
 import Footer from '@/components/shared/Footer/Footer';
 import Header from '@/components/shared/Header';
-import Index from '@/components/signedIn';
-import Image from 'next/image';
 
 export default function Home() {
   return (
@@ -32,8 +30,6 @@ export default function Home() {
         {/* Search Bar */}
         <SearchBar />
       </main>
-      <Footer />
-      <Index />
     </>
   );
 }

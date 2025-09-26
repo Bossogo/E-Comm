@@ -1,10 +1,8 @@
 'use client';
-
-import AppLayout from './AppLayout';
-import AMR from '../home/AMR';
+import AMR from '../../components/home/AMR';
 import { useState } from 'react';
 import { HiOutlineSquares2X2, HiOutlineBars3 } from 'react-icons/hi2';
-import ProductCard from '../shared/ProductCard';
+import ProductCard from '../../components/shared/ProductCard';
 
 export const products = [
   {
@@ -212,7 +210,7 @@ export default function Products() {
   };
 
   return (
-    <AppLayout>
+    <>
       <AMR />
 
       <ProductToolbar
@@ -253,6 +251,6 @@ export default function Products() {
           Next
         </button>
       </div>
-    </AppLayout>
+    </>
   );
 }
