@@ -222,7 +222,7 @@ export default function Products() {
         showCount={showCount}
         setShowCount={(count) => {
           setShowCount(count);
-          setCurrentPage(1); // reset page on items-per-page change
+          setCurrentPage(1); 
         }}
       />
 
