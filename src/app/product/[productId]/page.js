@@ -1,9 +1,11 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { products } from '@/app/data/products';
 import Container from '@/components/shared/Container';
 import TopBar from '@/components/shared/Header/TopBar';
 import MainNav from '@/components/shared/Header/MainNav';
+import ProductCard from '@/components/shared/ProductCard';
+import { Minus, Plus, ShoppingCart, Heart } from 'lucide-react';
 
 export default function ProductPage({ params }) {
   const { productId } = params;
@@ -38,13 +40,24 @@ export default function ProductPage({ params }) {
   const [selectedSize, setSelectedSize] = useState('M');
   const [quantity, setQuantity] = useState(1);
 
+  const [sidebarIndex, setSidebarIndex] = useState(0);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSidebarIndex((prev) => (prev + 1) % products.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const sidebarProduct = products[sidebarIndex];
+
   return (
     <>
       <Container>
         <TopBar />
         <MainNav />
       </Container>
-      <div className="p-8 max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10">
+
+      <div className="p-8 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-10">
         <div>
           <img
             src={product.image}
@@ -139,23 +152,29 @@ export default function ProductPage({ params }) {
           </div>
 
           <div className="flex items-center gap-4 mb-6">
-            <div className="flex items-center border rounded">
+            <div className="flex items-center border rounded-lg overflow-hidden">
               <button
                 onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                className="px-3 py-1"
+                className="px-3 py-2 hover:bg-gray-100"
               >
-                -
+                <Minus size={16} />
               </button>
-              <span className="px-4">{quantity}</span>
+              <span className="px-4 text-sm font-medium">{quantity}</span>
               <button
                 onClick={() => setQuantity(quantity + 1)}
-                className="px-3 py-1"
+                className="px-3 py-2 hover:bg-gray-100"
               >
-                +
+                <Plus size={16} />
               </button>
             </div>
-            <button className="bg-sky-600 text-white px-6 py-2 rounded hover:bg-sky-700">
-              Add to Cart
+
+            <button className="flex items-center gap-2 bg-sky-600 text-white px-6 py-2 rounded-lg hover:bg-sky-700 transition">
+              <ShoppingCart size={18} />
+              <span>Add to Cart</span>
+            </button>
+
+            <button className="p-2 border rounded-lg hover:bg-gray-100 transition">
+              <Heart size={20} className="text-gray-500 hover:text-red-500" />
             </button>
           </div>
 
@@ -169,7 +188,14 @@ export default function ProductPage({ params }) {
           </div>
         </div>
 
-        <div className="lg:col-span-2 mt-10">
+        <div className="w-full lg:w-72">
+          <h3 className="font-semibold text-lg mb-3">You may like</h3>
+          <ProductCard product={sidebarProduct} />
+        </div>
+      </div>
+
+      <div className="px-8 max-w-7xl mx-auto">
+        <div className="mt-10">
           <div className="border-b flex gap-6 mb-4">
             <button className="pb-2 border-b-2 border-sky-600 font-medium">
               Product Information
@@ -181,6 +207,24 @@ export default function ProductPage({ params }) {
             {product.description ||
               'This is a sample product description. Replace this with dynamic data if available.'}
           </p>
+        </div>
+
+        <div className="mt-16 mb-16">
+          <h2 className="text-2xl font-bold mb-6">Related Products</h2>
+
+          <div className="flex gap-4 overflow-x-auto md:hidden pb-4">
+            {products.slice(0, 8).map((p) => (
+              <div key={p.id} className="min-w-[70%] sm:min-w-[45%]">
+                <ProductCard product={p} />
+              </div>
+            ))}
+          </div>
+
+          <div className="hidden md:grid grid-cols-2 md:grid-cols-4 gap-6">
+            {products.slice(0, 4).map((p) => (
+              <ProductCard key={p.id} product={p} />
+            ))}
+          </div>
         </div>
       </div>
     </>
