@@ -1,12 +1,14 @@
 import Container from '../shared/Container';
 
-export default function AMR() {
+export default function AMR({size = 'large'}) {
   return (
     <section className="bg-[#40BFFF] relative overflow-hidden">
       <Container>
-        <div className="flex flex-col lg:flex-row items-center justify-between py-12 lg:py-20 relative">
+        <div className={ size === 'small' ? `flex flex-col lg:flex-row items-center justify-between py-8 lg:py-12 relative` :
+          `flex flex-col lg:flex-row items-center justify-between py-10 lg:py-15 relative`}>
           <div className="text-white max-w-lg z-10">
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">
+            <h1 className={ size === 'small' ? `text-2xl sm:text-3xl lg:text-4xl font-bold leading-tight` :
+              `text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight`}>
               Adidas Men Running Sneakers
             </h1>
             <p className="mt-4 text-sm sm:text-base lg:text-lg">
@@ -20,11 +22,11 @@ export default function AMR() {
             </button>
           </div>
 
-          <div className="relative w-full lg:w-auto h-[350px] lg:h-[450px]">
+          <div className="relative w-full lg:w-auto h-[300px] lg:h-[400px]">
             <img
               src="/images/shoes-shoe-png-transparent-shoe-images-pluspng-17 1.png"
               alt="Adidas Running Sneakers"
-              className=" z-10 -top-10 lg:-top-16 right-0 w-[280px] sm:w-[350px] lg:w-[420px] drop-shadow-xl"
+              className=" z-10 w-[280px] sm:w-[350px] lg:w-[420px] drop-shadow-xl"
             />
           </div>
         </div>

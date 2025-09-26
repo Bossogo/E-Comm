@@ -31,9 +31,13 @@ export default function AppLayout({ children }) {
   return (
     <>
       <Header />
-      <div className="min-h-screen bg-gray-50 flex">
-        <aside className="w-64 bg-white p-6 border-r border-gray-200 overflow-y-auto">
-          <div className="mb-6">
+      <div className="bg-gray-100 text-md flex items-center justify-center py-2">
+        <span className='text-brand-blue'>Home </span>&nbsp;/ Hotdeal
+      </div>
+
+      <div className="min-h-screen flex mt-8">
+        <aside className="w-64 bg-white pl-6 overflow-y-auto">
+          <div className="mb-6 bg-brand-grey py-4 px-4">
             <h2 className="text-xl font-semibold mb-4">Hot Deals</h2>
             <ul className="space-y-1">
               {hotDeals.map((item, idx) => (
@@ -48,7 +52,7 @@ export default function AppLayout({ children }) {
             </ul>
           </div>
 
-          <div className="mb-6">
+          <div className="mb-6 bg-brand-grey py-4 px-4">
             <h2 className="text-xl font-semibold mb-2">Prices</h2>
             <div className="flex justify-between text-gray-700 text-sm mb-2">
               <span>${priceRange[0].toFixed(2)}</span>
@@ -66,7 +70,7 @@ export default function AppLayout({ children }) {
             />
           </div>
 
-          <div className="mb-6">
+          <div className="mb-6 bg-brand-grey py-4 px-4">
             <h2 className="text-xl font-semibold mb-2">Color</h2>
             <div className="flex flex-wrap gap-2">
               {colors.map((c, idx) => (
@@ -84,7 +88,7 @@ export default function AppLayout({ children }) {
             </div>
           </div>
 
-          <div className="mb-6">
+          <div className="mb-6 bg-brand-grey py-4 px-4">
             <h2 className="text-xl font-semibold mb-2">Brand</h2>
             <ul className="space-y-1">
               {brands.map((b, idx) => (
@@ -100,7 +104,7 @@ export default function AppLayout({ children }) {
           </div>
         </aside>
 
-        <main className="flex-1 p-6">{children}</main>
+        <main className="flex-1 px-6">{children}</main>
       </div>
     </>
   );

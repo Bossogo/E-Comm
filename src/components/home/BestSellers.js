@@ -1,6 +1,6 @@
 import React from 'react';
 import Container from '../shared/Container';
-import ProductCard from '../shared/ProductCard';
+import ProductCard from '../Product/ProductCard';
 
 function BestSellers() {
   const products = [

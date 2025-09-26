@@ -1,14 +1,11 @@
 import React from 'react'
-import Container from '@/components/shared/Container'
-import TopBar from '@/components/shared/Header/TopBar'
-import MainNav from '@/components/shared/Header/MainNav'
-import Products from './Products'
-function ProductsPage() {
+import ProductsPage from './ProductsPage'
+function Products() {
   return (
     <>
-        <Products />
+        <ProductsPage />
     </>
   )
 }
 
-export default ProductsPage
+export default Products

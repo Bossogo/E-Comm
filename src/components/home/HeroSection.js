@@ -1,5 +1,5 @@
 import Container from '../shared/Container';
-import ProductCard from '../shared/ProductCard';
+import ProductCard from '../Product/ProductCard';
 
 import React from 'react';
 
