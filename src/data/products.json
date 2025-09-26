@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "title": "Nike Air Max 270 React",
+    "categoryId": 2,
+    "price": 299.43,
+    "discountPrice": 249.99,
+    "images": [
+      "/images/products/nike-air-max-270-1.png",
+      "/images/products/nike-air-max-270-2.png"
+    ],
+    "description": "Lightweight sneakers designed for comfort and speed.",
+    "stock": 50,
+    "isBestSeller": true,
+    "tags": ["hot", "flash-sale"],
+    "relatedProductIds": [2, 3]
+  },
+  {
+    "id": 2,
+    "title": "Quilted Maxi Cross Bag",
+    "categoryId": 1,
+    "price": 320.00,
+    "discountPrice": 299.43,
+    "images": ["/images/products/maxi-cross-bag.png"],
+    "description": "Stylish quilted cross bag with adjustable strap.",
+    "stock": 20,
+    "isBestSeller": false,
+    "tags": ["flash-sale"],
+    "relatedProductIds": [1]
+  },
+  {
+    "id": 3,
+    "title": "Adidas Men Running Sneakers",
+    "categoryId": 2,
+    "price": 199.99,
+    "discountPrice": 179.99,
+    "images": ["/images/products/adidas-running.png"],
+    "description": "Performance running sneakers with breathable mesh.",
+    "stock": 35,
+    "isBestSeller": true,
+    "tags": ["featured"],
+    "relatedProductIds": [1, 2]
+  }
+]
