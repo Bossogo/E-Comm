@@ -1,8 +1,6 @@
 import Container from '../shared/Container';
 import ProductCard from '../Product/ProductCard';
 
-import React from 'react';
-
 export default function HeroSection() {
   const products = [
     {
