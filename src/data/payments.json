@@ -1,0 +1,11 @@
+[
+  {
+    "id": 1,
+    "orderId": 1,
+    "method": "credit_card",
+    "status": "success",
+    "transactionId": "txn_123456",
+    "amount": 898.29,
+    "createdAt": "2025-09-21T10:16:00Z"
+  }
+]
