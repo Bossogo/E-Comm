@@ -3,96 +3,8 @@ import AMR from '../../components/home/AMR';
 import { useState } from 'react';
 import { HiOutlineSquares2X2, HiOutlineBars3 } from 'react-icons/hi2';
 import ProductCard from '../../components/shared/ProductCard';
+import { products } from '../data/products';
 
-export const products = [
-  {
-    title: 'Classic Leather Bag',
-    image: '/images/image Product.png',
-    price: 120,
-    oldPrice: 150,
-    discount: 20,
-    rating: 4.5,
-    isHot: true,
-  },
-  {
-    title: 'Running Sneakers',
-    image: '/images/image Product (1).png',
-    price: 80,
-    oldPrice: 100,
-    discount: 20,
-    rating: 4.2,
-    isHot: false,
-  },
-  {
-    title: 'Elegant Belt',
-    image: '/images/image Product (2).png',
-    price: 35,
-    oldPrice: 50,
-    discount: 30,
-    rating: 4.0,
-    isHot: true,
-  },
-  {
-    title: 'Casual Backpack',
-    image: '/images/image Product (3).png',
-    price: 65,
-    rating: 4.3,
-    isHot: false,
-  },
-  {
-    title: 'High Top Sneakers',
-    image: '/images/image Product (4).png',
-    price: 95,
-    oldPrice: 120,
-    discount: 20,
-    rating: 4.6,
-    isHot: true,
-  },
-  {
-    title: 'Fashionable Belt',
-    image: '/images/image Product (5).png',
-    price: 40,
-    rating: 4.1,
-    isHot: false,
-  },
-  {
-    title: 'Mini Leather Bag',
-    image: '/images/image Product (3).png',
-    price: 90,
-    oldPrice: 110,
-    discount: 18,
-    rating: 4.4,
-    isHot: false,
-  },
-  {
-    title: 'Sports Sneakers',
-    image: '/images/image Product.png',
-    price: 70,
-    rating: 4.0,
-    isHot: false,
-  },
-  {
-    title: 'Sports Sneakers',
-    image: '/images/image Product.png',
-    price: 70,
-    rating: 4.0,
-    isHot: false,
-  },
-  {
-    title: 'Sports Sneakers',
-    image: '/images/image Product.png',
-    price: 70,
-    rating: 4.0,
-    isHot: false,
-  },
-  {
-    title: 'Sports Sneakers',
-    image: '/images/image Product.png',
-    price: 70,
-    rating: 4.0,
-    isHot: false,
-  },
-];
 
 function ProductToolbar({
   totalItems,
@@ -105,10 +17,8 @@ function ProductToolbar({
 
   return (
     <div className="flex flex-col md:flex-row items-center justify-between mt-6 mb-6 gap-4">
-      {/* Left side: Items count */}
       <div className="text-gray-700 font-medium">{totalItems} items</div>
 
-      {/* Middle: Sort & Show dropdowns */}
       <div className="flex items-center gap-4">
         <div>
           <label className="mr-2 font-medium text-gray-700">Sort by:</label>
@@ -141,7 +51,6 @@ function ProductToolbar({
         </div>
       </div>
 
-      {/* Right side: View toggle */}
       <div className="ml-auto flex items-center gap-2">
         <button
           onClick={() => setView('grid')}
@@ -179,14 +88,14 @@ function ProductDisplay({ products, view = 'grid', currentPage, showCount }) {
     <div>
       {view === 'grid' ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {paginatedProducts.map((product, index) => (
-            <ProductCard key={index} product={product} layout="overlay" />
+          {paginatedProducts.map((product) => (
+            <ProductCard key={product.id} product={product} layout="overlay" />
           ))}
         </div>
       ) : (
         <div className="flex flex-col gap-4">
-          {paginatedProducts.map((product, index) => (
-            <ProductCard key={index} product={product} layout="row" />
+          {paginatedProducts.map((product) => (
+            <ProductCard key={product.id} product={product} layout="row" />
           ))}
         </div>
       )}
@@ -220,7 +129,7 @@ export default function Products() {
         showCount={showCount}
         setShowCount={(count) => {
           setShowCount(count);
-          setCurrentPage(1); 
+          setCurrentPage(1);
         }}
       />
 
@@ -231,7 +140,6 @@ export default function Products() {
         showCount={showCount}
       />
 
-      {/* Pagination */}
       <div className="flex justify-center items-center gap-4 mt-6">
         <button
           onClick={handlePrev}
