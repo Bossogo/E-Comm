@@ -1,9 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import Container from '@/components/shared/Container';
-import TopBar from '@/components/shared/Header/TopBar';
-import MainNav from '@/components/shared/Header/MainNav';
+import Header from '@/components/shared/Header';
 export default function AppLayout({ children }) {
   const [priceRange, setPriceRange] = useState([13.99, 25.99]);
   const colors = [
@@ -32,10 +30,7 @@ export default function AppLayout({ children }) {
 
   return (
     <>
-      <Container>
-          <TopBar />
-          <MainNav />   
-      </Container>
+      <Header />
       <div className="min-h-screen bg-gray-50 flex">
         <aside className="w-64 bg-white p-6 border-r border-gray-200 overflow-y-auto">
           <div className="mb-6">
