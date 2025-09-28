@@ -40,7 +40,7 @@ export default function HeroSection() {
           className="absolute inset-0 w-full h-full object-cover -z-10"
         />
         <Container>
-          <div className="flex flex-col justify-center h-full py-8">
+          <div className="flex flex-col justify-center h-full py-8 lg:translate-y-16">
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-white font-bold leading-tight">
               Super Flash Sale
               <span className="block mt-2">50% Off</span>

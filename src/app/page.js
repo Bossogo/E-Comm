@@ -5,7 +5,6 @@ import GRI from '@/components/home/GRI';
 import FeaturedProducts from '@/components/home/FeaturedProducts';
 import LatestNews from '@/components/home/LatestNews';
 import SearchBar from '@/components/home/SearchBar';
-import Footer from '@/components/shared/Footer/Footer';
 import Header from '@/components/shared/Header';
 
 export default function Home() {

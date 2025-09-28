@@ -1,4 +1,7 @@
+"use client";
+
 import Link from 'next/link';
+import { useCart } from '@/context/CartContext';
 
 export default function ProductCard({
   product,
@@ -22,6 +25,7 @@ export default function ProductCard({
     rating,
     isHot,
   };
+  const { addToCart } = useCart();
 
   const cardContent =
     layout === 'row' ? (
@@ -45,9 +49,13 @@ export default function ProductCard({
             {item.title}
           </h3>
           <div className="flex items-center gap-2 mt-1">
-            <span className="text-sm font-bold text-gray-900">{item.price}</span>
+            <span className="text-sm font-bold text-gray-900">
+              {item.price}
+            </span>
             {item.oldPrice && (
-              <span className="text-xs line-through text-gray-400">{item.oldPrice}</span>
+              <span className="text-xs line-through text-gray-400">
+                {item.oldPrice}
+              </span>
             )}
           </div>
           {item.rating && (
@@ -74,10 +82,14 @@ export default function ProductCard({
         <div className="absolute bottom-4 left-4 text-white">
           <h3 className="font-semibold text-lg">{item.title}</h3>
           {item.oldPrice && (
-            <p className="line-through text-gray-300 text-sm">{item.oldPrice}</p>
+            <p className="line-through text-gray-300 text-sm">
+              {item.oldPrice}
+            </p>
           )}
           {item.discount && (
-            <p className="text-red-400 font-bold text-sm">{item.discount}% Off</p>
+            <p className="text-red-400 font-bold text-sm">
+              {item.discount}% Off
+            </p>
           )}
           <p className="text-sky-400 font-bold text-lg">{item.price}</p>
         </div>
@@ -86,7 +98,13 @@ export default function ProductCard({
           <button className="p-3 bg-white rounded-full shadow-md hover:bg-gray-100 transition">
             ❤️
           </button>
-          <button className="p-3 bg-white rounded-full shadow-md hover:bg-gray-100 transition">
+          <button
+            className="p-3 bg-white rounded-full shadow-md hover:bg-gray-100 transition"
+            onClick={(e) => {
+              e.preventDefault();
+              addToCart(item, 1);
+            }}
+          >
             🛒
           </button>
         </div>

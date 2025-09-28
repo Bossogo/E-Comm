@@ -96,5 +96,15 @@ export const products = [
     price: 70,
     rating: 4.0,
     isHot: false,
-  },
+    },
+  {
+    id: 'p3',
+    title: 'Elegant Belt',
+    image: '/images/image Product (2).png',
+    price: 35,
+    oldPrice: 50,
+    discount: 30,
+    rating: 4.0,
+    isHot: true,
+  }
 ];

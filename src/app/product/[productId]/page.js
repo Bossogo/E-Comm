@@ -6,10 +6,12 @@ import TopBar from '@/components/shared/Header/TopBar';
 import MainNav from '@/components/shared/Header/MainNav';
 import ProductCard from '@/components/shared/ProductCard';
 import { Minus, Plus, ShoppingCart, Heart } from 'lucide-react';
+import { useCart } from '@/context/CartContext';
 
 export default function ProductPage({ params }) {
   const { productId } = params;
   let product = products.find((p) => String(p.id) === String(productId));
+  const { addToCart } = useCart();
 
   if (!product) {
     const withoutP = productId.startsWith('p') ? productId.slice(1) : null;
@@ -168,7 +170,20 @@ export default function ProductPage({ params }) {
               </button>
             </div>
 
-            <button className="flex items-center gap-2 bg-sky-600 text-white px-6 py-2 rounded-lg hover:bg-sky-700 transition">
+            <button
+              className="flex items-center gap-2 bg-sky-600 text-white px-6 py-2 rounded-lg hover:bg-sky-700 transition"
+              onClick={() =>
+                addToCart(
+                  {
+                    id: product.id,
+                    name: product.name,
+                    price: product.price,
+                    image: product.image,
+                  },
+                  quantity
+                )
+              }
+            >
               <ShoppingCart size={18} />
               <span>Add to Cart</span>
             </button>

@@ -1,6 +1,12 @@
+'use client';
+
+import Link from 'next/link';
 import { FaUser, FaShoppingCart, FaSearch } from 'react-icons/fa';
+import { useCart } from '@/context/CartContext';
 
 export default function Topbar() {
+  const { cartCount, cartTotal } = useCart();
+
   return (
     <div className="w-full bg-white text-xs sm:text-sm py-2 px-4 flex justify-between items-center">
       <div className="flex items-center space-x-3 sm:space-x-4">
@@ -22,14 +28,16 @@ export default function Topbar() {
           <span>My profile</span>
         </button>
 
-        <div className="relative cursor-pointer">
+        <Link href="/cart" className="relative cursor-pointer">
           <FaShoppingCart className="text-lg" />
           <span className="absolute -top-1 -right-2 bg-red-500 text-white text-[10px] rounded-full px-1">
-            0
+            {cartCount}
           </span>
-        </div>
+        </Link>
 
-        <span className="hidden sm:inline text-gray-600">$0.00</span>
+        <span className="hidden sm:inline text-gray-600">
+          ${cartTotal.toFixed(2)}
+        </span>
 
         <button className="hover:text-blue-500">
           <FaSearch className="text-lg" />
