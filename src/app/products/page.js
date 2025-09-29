@@ -1,11 +1,10 @@
 'use client';
 
-import AMR from '../../components/home/AMR';
-import { useState } from 'react';
+import AMR from '@/components/home/AMR';
+import { useState, useEffect, useMemo } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { HiOutlineSquares2X2, HiOutlineBars3 } from 'react-icons/hi2';
-import ProductCard from '../../components/shared/ProductCard';
-import { products } from '../data/products';
+import ProductCard from '@/components/shared/ProductCard';
 import { useFilters } from '@/context/FiltersContext';
 
 function ProductToolbar({
@@ -18,7 +17,7 @@ function ProductToolbar({
   const { sortBy, setSortBy } = useFilters();
 
   return (
-    <div className="flex flex-col md:flex-row items-center justify-between mt-6 mb-6 gap-4">
+    <div className="flex flex-col bg-brand-grey px-4 py-4 md:flex-row items-center justify-between mt-6 mb-6 gap-4">
       <div className="text-gray-700 font-medium">{totalItems} items</div>
 
       <div className="flex items-center gap-4">
@@ -109,64 +108,122 @@ export default function Products() {
   const [view, setView] = useState('grid');
   const [showCount, setShowCount] = useState(4);
   const [currentPage, setCurrentPage] = useState(1);
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const searchParams = useSearchParams();
   const queryCategory = searchParams.get('category');
 
   const { filters } = useFilters();
-  const { category, hotDeal, brand, color, priceRange, search, sortBy } =
-    filters;
+  const { category, hotDeal, brand, color, priceRange, search, sortBy } = filters;
 
-  let filteredProducts = products;
+  useEffect(() => {
+    let ignore = false;
+    const getProducts = async () => {
+      try {
+        setLoading(true);
+        const res = await fetch('/api/products', { cache: 'no-store' });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        setProducts(data.products);
+      } catch (e) {
+        if (!ignore) setError(e.message || 'Failed to load products');
+      } finally {
+        if (!ignore) setLoading(false);
+      }
+    };
+    getProducts();
+    return () => { ignore = true; };
+  }, []);
 
-  const activeCategory = queryCategory || category;
-  if (activeCategory) {
-    filteredProducts = filteredProducts.filter(
-      (p) =>
-        p.category && p.category.toLowerCase() === activeCategory.toLowerCase()
-    );
-  }
+  const filteredProducts = useMemo(() => {
+    let result = Array.isArray(products) ? products : [];
+    if (!Array.isArray(result)) {
+      console.warn('Products state is not an array; received:', products);
+      return [];
+    }
 
-  if (filters.hotOnly) {
-    filteredProducts = filteredProducts.filter((p) => p.isHot);
-  }
+    const activeCategory = queryCategory || category;
+    if (activeCategory) {
+      // Attempt numeric match first then fallback to string field if added later
+      result = result.filter((p) => {
+        if (p.category) {
+          return (
+            typeof p.category === 'string' &&
+            p.category.toLowerCase() === activeCategory.toLowerCase()
+          );
+        }
+        return String(p.categoryId) === String(activeCategory);
+      });
+    }
 
-  if (hotDeal) {
-    filteredProducts = filteredProducts.filter((p) => p.isHot === true);
-  }
+    if (filters.hotOnly) {
+      result = result.filter((p) => p.isHot || p.isBestSeller);
+    }
+    if (hotDeal) {
+      result = result.filter((p) => p.isHot === true || p.isBestSeller);
+    }
+    if (brand) {
+      result = result.filter((p) => p.brand === brand);
+    }
+    if (color) {
+      result = result.filter((p) => p.color === color);
+    }
+    if (Array.isArray(priceRange) && priceRange.length === 2) {
+      result = result.filter(
+        (p) => p.price >= priceRange[0] && p.price <= priceRange[1]
+      );
+    }
+    if (search) {
+      result = result.filter((p) =>
+        p.title?.toLowerCase().includes(search.toLowerCase())
+      );
+    }
+    if (sortBy === 'price-low-high') {
+      result = [...result].sort((a, b) => a.price - b.price);
+    } else if (sortBy === 'price-high-low') {
+      result = [...result].sort((a, b) => b.price - a.price);
+    } else if (sortBy === 'rating') {
+      result = [...result].sort((a, b) => (b.rating || 0) - (a.rating || 0));
+    } else if (sortBy === 'newest') {
+      result = [...result].sort(
+        (a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0)
+      );
+    }
+    // Final defensive return – always an array
+    return Array.isArray(result) ? result : [];
+  }, [
+    products,
+    queryCategory,
+    category,
+    filters.hotOnly,
+    hotDeal,
+    brand,
+    color,
+    priceRange,
+    search,
+    sortBy,
+  ]);
 
-  if (brand) {
-    filteredProducts = filteredProducts.filter((p) => p.brand === brand);
-  }
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [
+    queryCategory,
+    category,
+    filters.hotOnly,
+    hotDeal,
+    brand,
+    color,
+    priceRange,
+    search,
+    sortBy,
+    showCount,
+  ]);
 
-  if (color) {
-    filteredProducts = filteredProducts.filter((p) => p.color === color);
-  }
-
-  if (Array.isArray(priceRange) && priceRange.length === 2) {
-    filteredProducts = filteredProducts.filter(
-      (p) => p.price >= priceRange[0] && p.price <= priceRange[1]
-    );
-  }
-
-  if (search) {
-    filteredProducts = filteredProducts.filter((p) =>
-      p.title.toLowerCase().includes(search.toLowerCase())
-    );
-  }
-
-  if (sortBy === 'price-low-high') {
-    filteredProducts = [...filteredProducts].sort((a, b) => a.price - b.price);
-  } else if (sortBy === 'price-high-low') {
-    filteredProducts = [...filteredProducts].sort((a, b) => b.price - a.price);
-  } else if (sortBy === 'rating') {
-    filteredProducts = [...filteredProducts].sort(
-      (a, b) => b.rating - a.rating
-    );
-  }
-
-  const totalPages = Math.ceil(
-    filteredProducts.length > 0 ? filteredProducts.length / showCount : 1
+  const totalPages = useMemo(
+    () => Math.max(1, Math.ceil(filteredProducts.length / showCount)),
+    [filteredProducts.length, showCount]
   );
 
   const handlePrev = () => {
@@ -181,43 +238,54 @@ export default function Products() {
     <>
       <AMR />
 
-      <ProductToolbar
-        totalItems={filteredProducts.length}
-        view={view}
-        setView={setView}
-        showCount={showCount}
-        setShowCount={(count) => {
-          setShowCount(count);
-          setCurrentPage(1);
-        }}
-      />
+      {loading && (
+        <div className="py-10 text-center text-gray-500">Loading products...</div>
+      )}
+      {error && !loading && (
+        <div className="py-10 text-center text-red-600">{error}</div>
+      )}
 
-      <ProductDisplay
-        products={filteredProducts}
-        view={view}
-        currentPage={currentPage}
-        showCount={showCount}
-      />
+      {!loading && !error && (
+        <>
+          <ProductToolbar
+            totalItems={filteredProducts.length}
+            view={view}
+            setView={setView}
+            showCount={showCount}
+            setShowCount={(count) => {
+              setShowCount(count);
+              setCurrentPage(1);
+            }}
+          />
 
-      <div className="flex justify-center items-center gap-4 mt-6">
-        <button
-          onClick={handlePrev}
-          disabled={currentPage === 1}
-          className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50"
-        >
-          Prev
-        </button>
-        <span className="text-gray-700 font-medium">
-          Page {currentPage} of {totalPages}
-        </span>
-        <button
-          onClick={handleNext}
-          disabled={currentPage === totalPages}
-          className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50"
-        >
-          Next
-        </button>
-      </div>
+          <ProductDisplay
+            products={filteredProducts}
+            view={view}
+            currentPage={currentPage}
+            showCount={showCount}
+          />
+
+          <div className="flex justify-center items-center gap-4 mt-6">
+            <button
+              onClick={handlePrev}
+              disabled={currentPage === 1}
+              className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50"
+            >
+              Prev
+            </button>
+            <span className="text-gray-700 font-medium">
+              Page {currentPage} of {totalPages}
+            </span>
+            <button
+              onClick={handleNext}
+              disabled={currentPage === totalPages}
+              className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50"
+            >
+              Next
+            </button>
+          </div>
+        </>
+      )}
     </>
   );
 }

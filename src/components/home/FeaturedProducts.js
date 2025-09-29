@@ -1,5 +1,5 @@
 import Container from '../shared/Container';
-import ProductCard from '../Product/ProductCard';
+import ProductCard from '../shared/ProductCard';
 
 export default function FeaturedProducts() {
   const products = [

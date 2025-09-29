@@ -1,4 +1,4 @@
-import ProductCard from '@/components/Product/ProductCard';
+import ProductCard from '@/components/shared/ProductCard';
 
 export default function ProductDisplay({ products, view = 'grid', currentPage, showCount, sortBy }) {
   if (!products || products.length === 0) {

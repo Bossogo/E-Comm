@@ -1,6 +1,15 @@
-import { products } from '@/data/products.json';
+import data from '@/data/products.json';
 import { NextResponse } from 'next/server';
 
-export async function GET(req){
-    return NextResponse.json(products);
+export const dynamic = 'force-dynamic';
+
+export async function GET() {
+    try {
+        return NextResponse.json(data);
+    } catch (e) {
+        return NextResponse.json(
+            { success: false, error: 'Failed to load products' },
+            { status: 500 }
+        );
+    }
 }
