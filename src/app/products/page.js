@@ -14,7 +14,9 @@ function ProductToolbar({
   showCount,
   setShowCount,
 }) {
-  const { sortBy, setSortBy } = useFilters();
+  // useFilters returns { filters, setFilters }
+  const { filters, setFilters } = useFilters();
+  const { sortBy } = filters;
 
   return (
     <div className="flex flex-col bg-brand-grey px-4 py-4 md:flex-row items-center justify-between mt-6 mb-6 gap-4">
@@ -25,7 +27,9 @@ function ProductToolbar({
           <label className="mr-2 font-medium text-gray-700">Sort by:</label>
           <select
             value={sortBy}
-            onChange={(e) => setSortBy(e.target.value)}
+            onChange={(e) =>
+              setFilters((prev) => ({ ...prev, sortBy: e.target.value }))
+            }
             className="border border-gray-300 rounded px-2 py-1"
           >
             <option value="default">Default</option>
@@ -126,13 +130,19 @@ export default function Products() {
         const res = await fetch('/api/products', { cache: 'no-store' });
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const data = await res.json();
-        setProducts(data.products);
-      } catch (e) {
-        if (!ignore) setError(e.message || 'Failed to load products');
-      } finally {
-        if (!ignore) setLoading(false);
-      }
-    };
+        // Accept shapes: array, {data: [...]}, {products: [...]}
+        let extracted = [];
+        if (Array.isArray(data)) extracted = data;
+        else if (Array.isArray(data.data)) extracted = data.data;
+        else if (Array.isArray(data.products)) extracted = data.products;
+        else console.warn('Unexpected products payload shape', data);
+        setProducts(extracted);
+            } catch (e) {
+              if (!ignore) setError(e.message || 'Failed to load products');
+            } finally {
+              if (!ignore) setLoading(false);
+            }
+          };
     getProducts();
     return () => { ignore = true; };
   }, []);
