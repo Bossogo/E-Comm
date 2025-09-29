@@ -1,15 +1,19 @@
 'use client';
 
+import { useState } from 'react';
 import { useCart } from '@/context/CartContext';
 import { Minus, Plus, X } from 'lucide-react';
 import Container from '@/components/shared/Container';
 import TopBar from '@/components/shared/Header/TopBar';
 import MainNav from '@/components/shared/Header/MainNav';
+import CheckoutModal from '@/components/CheckoutModal';
 
 export default function CartPage() {
   const { cartItems, addToCart, removeFromCart, cartTotal } = useCart();
 
   const shippingFee = 20;
+
+  const [showCheckout, setShowCheckout] = useState(false);
 
   return (
     <>
@@ -63,7 +67,6 @@ export default function CartPage() {
                       </button>
                     </div>
 
-
                     <span className="font-medium">
                       ${(item.price * item.quantity).toFixed(2)}
                     </span>
@@ -104,9 +107,17 @@ export default function CartPage() {
             <span>${(cartTotal + shippingFee).toFixed(2)}</span>
           </div>
 
-          <button className="w-full mt-6 bg-sky-600 text-white py-3 rounded-lg hover:bg-sky-700">
+          <button
+            onClick={() => setShowCheckout(true)}
+            className="w-full mt-6 bg-sky-600 text-white py-3 rounded-lg hover:bg-sky-700"
+          >
             Check out
           </button>
+
+          <CheckoutModal
+            isOpen={showCheckout}
+            onClose={() => setShowCheckout(false)}
+          />
         </div>
       </div>
     </>

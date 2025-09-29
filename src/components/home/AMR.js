@@ -1,4 +1,6 @@
 import Container from '../shared/Container';
+import Link from 'next/link';
+import React from 'react';
 
 export default function AMR() {
   return (
@@ -12,12 +14,15 @@ export default function AMR() {
             <p className="mt-4 text-sm sm:text-base lg:text-lg">
               Performance and designs. Taken right to the edge.
             </p>
-            <button className="mt-6 text-white font-semibold relative group cursor-pointer">
+            <Link
+              href="/products"
+              className="block mt-6 text-white font-semibold relative group cursor-pointer"
+            >
               <span className="relative">
                 SHOP NOW
                 <span className="absolute left-0 -bottom-1.5 w-0 h-[2px] bg-white transition-all duration-300 ease-in-out group-hover:w-full"></span>
               </span>
-            </button>
+            </Link>
           </div>
 
           <div className="flex justify-center lg:justify-end w-full lg:w-1/2 mt-10 lg:mt-0">
