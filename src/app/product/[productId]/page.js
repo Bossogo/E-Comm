@@ -41,7 +41,7 @@ export default function ProductPage({ params }) {
   );
   const [selectedSize, setSelectedSize] = useState('M');
   const [quantity, setQuantity] = useState(1);
-
+  const [mainImage, setMainImage] = useState(product.image);
   const [sidebarIndex, setSidebarIndex] = useState(0);
   useEffect(() => {
     const interval = setInterval(() => {
@@ -62,17 +62,24 @@ export default function ProductPage({ params }) {
       <div className="p-8 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-10">
         <div>
           <img
-            src={product.image}
+            src={mainImage}
             alt={product.title}
             className="w-full h-96 object-contain border rounded-lg mb-4"
           />
+
           <div className="flex gap-3">
             {[product.image, ...(product.gallery || [])].map((img, i) => (
               <img
                 key={i}
                 src={img}
                 alt={`${product.title} preview ${i}`}
-                className="w-20 h-20 object-contain border rounded cursor-pointer hover:border-sky-500"
+                onClick={() => setMainImage(img)}
+                className={`w-20 h-20 object-contain border rounded cursor-pointer transition 
+                  ${
+                    mainImage === img
+                      ? 'border-sky-500'
+                      : 'border-gray-300 hover:border-sky-400'
+                  }`}
               />
             ))}
           </div>
@@ -220,7 +227,7 @@ export default function ProductPage({ params }) {
           </div>
           <p className="text-gray-700 leading-relaxed">
             {product.description ||
-              'This is a sample product description. Replace this with dynamic data if available.'}
+              'lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'}
           </p>
         </div>
 

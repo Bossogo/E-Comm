@@ -12,6 +12,12 @@ export const products = [
     category: 'bags',
     brand: 'FauxBrand',
     color: 'Black',
+    gallery: [
+      '/images/Product Picture02.png',
+      '/images/Product Picture03.png',
+      '/images/image Product (2).png',
+      '/images/Product Picture01.png',
+    ],
     createdAt: '2025-09-01',
   },
   {
@@ -27,6 +33,12 @@ export const products = [
     category: 'sneakers',
     brand: 'Nike',
     color: 'Blue',
+    gallery: [
+      '/images/Product Picture02.png',
+      '/images/Product Picture03.png',
+      '/images/image Product (2).png',
+      '/images/Product Picture01.png',
+    ],
     createdAt: '2025-08-20',
   },
   {
@@ -42,6 +54,12 @@ export const products = [
     category: 'belts',
     brand: 'LeClassic',
     color: 'Brown',
+    gallery: [
+      '/images/Product Picture02.png',
+      '/images/Product Picture03.png',
+      '/images/image Product (2).png',
+      '/images/Product Picture01.png',
+    ],
     createdAt: '2025-07-11',
   },
   {
@@ -55,6 +73,12 @@ export const products = [
     category: 'bags',
     brand: 'Vento',
     color: 'Black',
+    gallery: [
+      '/images/Product Picture02.png',
+      '/images/Product Picture03.png',
+      '/images/image Product (2).png',
+      '/images/Product Picture01.png',
+    ],
     createdAt: '2025-06-12',
   },
   {
@@ -70,6 +94,12 @@ export const products = [
     category: 'sneakers',
     brand: 'Adidas',
     color: 'White',
+    gallery: [
+      '/images/Product Picture02.png',
+      '/images/Product Picture03.png',
+      '/images/image Product (2).png',
+      '/images/Product Picture01.png',
+    ],
     createdAt: '2025-09-05',
   },
   {
@@ -83,6 +113,12 @@ export const products = [
     category: 'belts',
     brand: 'FauxBrand',
     color: 'Black',
+    gallery: [
+      '/images/Product Picture02.png',
+      '/images/Product Picture03.png',
+      '/images/image Product (2).png',
+      '/images/Product Picture01.png',
+    ],
     createdAt: '2025-01-22',
   },
   {
@@ -98,6 +134,12 @@ export const products = [
     category: 'bags',
     brand: 'LeClassic',
     color: 'Tan',
+    gallery: [
+      '/images/Product Picture02.png',
+      '/images/Product Picture03.png',
+      '/images/image Product (2).png',
+      '/images/Product Picture01.png',
+    ],
     createdAt: '2025-08-01',
   },
   {
@@ -111,6 +153,12 @@ export const products = [
     category: 'sneakers',
     brand: 'Puma',
     color: 'Red',
+    gallery: [
+      '/images/Product Picture02.png',
+      '/images/Product Picture03.png',
+      '/images/image Product (2).png',
+      '/images/Product Picture01.png',
+    ],
     createdAt: '2025-07-30',
   },
   {
@@ -126,6 +174,12 @@ export const products = [
     category: 'sunglasses',
     brand: 'Shadez',
     color: 'Black',
+    gallery: [
+      '/images/Product Picture02.png',
+      '/images/Product Picture03.png',
+      '/images/image Product (2).png',
+      '/images/Product Picture01.png',
+    ],
     createdAt: '2025-05-10',
   },
   {
@@ -141,6 +195,12 @@ export const products = [
     category: 'sunglasses',
     brand: 'Shadez',
     color: 'Gold',
+    gallery: [
+      '/images/Product Picture02.png',
+      '/images/Product Picture03.png',
+      '/images/image Product (2).png',
+      '/images/Product Picture01.png',
+    ],
     createdAt: '2025-04-05',
   },
   {
@@ -156,6 +216,12 @@ export const products = [
     category: 'handbags',
     brand: 'FauxBrand',
     color: 'Black',
+    gallery: [
+      '/images/Product Picture02.png',
+      '/images/Product Picture03.png',
+      '/images/image Product (2).png',
+      '/images/Product Picture01.png',
+    ],
     createdAt: '2025-03-14',
   },
   {
@@ -171,6 +237,12 @@ export const products = [
     category: 'handbags',
     brand: 'Vento',
     color: 'Burgundy',
+    gallery: [
+      '/images/Product Picture02.png',
+      '/images/Product Picture03.png',
+      '/images/image Product (2).png',
+      '/images/Product Picture01.png',
+    ],
     createdAt: '2025-02-10',
   },
 ];
