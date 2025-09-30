@@ -1,22 +1,47 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Header from '@/components/shared/Header';
-import { products } from '../data/products';
 import { useFilters } from '@/context/FiltersContext';
 import { useRouter } from 'next/navigation';
 
 function Sidebar() {
   const { filters, setFilters } = useFilters();
   const router = useRouter();
+  const [allProducts, setAllProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const brandCounts = products.reduce((acc, p) => {
-    acc[p.brand] = (acc[p.brand] || 0) + 1;
+  // Fetch products client-side (avoids broken static import path causing prerender error)
+  // Sidebar is a client component so safe to fetch here.
+  useEffect(() => {
+    let ignore = false;
+    async function load() {
+      try {
+        setLoading(true);
+        const res = await fetch('/api/products', { cache: 'no-store' });
+        const data = await res.json();
+        let extracted = [];
+        if (Array.isArray(data)) extracted = data;
+        else if (Array.isArray(data.data)) extracted = data.data;
+        else if (Array.isArray(data.products)) extracted = data.products;
+        if (!ignore) setAllProducts(extracted);
+      } catch (e) {
+        console.warn('Sidebar products fetch failed', e);
+      } finally {
+        if (!ignore) setLoading(false);
+      }
+    }
+    load();
+    return () => { ignore = true; };
+  }, []);
+
+  const brandCounts = allProducts.reduce((acc, p) => {
+    if (p.brand) acc[p.brand] = (acc[p.brand] || 0) + 1;
     return acc;
   }, {});
 
-  const colorCounts = products.reduce((acc, p) => {
-    acc[p.color] = (acc[p.color] || 0) + 1;
+  const colorCounts = allProducts.reduce((acc, p) => {
+    if (p.color) acc[p.color] = (acc[p.color] || 0) + 1;
     return acc;
   }, {});
 
@@ -44,7 +69,7 @@ function Sidebar() {
           >
             <span>Hot Deals</span>
             <span className="text-gray-500">
-              {products.filter((p) => p.isHot).length}
+              {allProducts.filter((p) => p.isHot || p.isBestSeller).length}
             </span>
           </li>
         </ul>
@@ -74,7 +99,8 @@ function Sidebar() {
       <div className="mb-6 bg-brand-grey p-6">
         <h2 className="text-xl font-semibold mb-2">Color</h2>
         <div className="flex flex-wrap gap-2">
-          {Object.entries(colorCounts).map(([color, count]) => (
+          {loading && <span className="text-sm text-gray-400">Loading…</span>}
+          {!loading && Object.entries(colorCounts).map(([color, count]) => (
             <div
               key={color}
               onClick={() => setFilters({ ...filters, color })}
@@ -96,7 +122,8 @@ function Sidebar() {
       <div className="mb-6 bg-brand-grey p-6">
         <h2 className="text-xl font-semibold mb-2">Brand</h2>
         <ul className="space-y-1">
-          {Object.entries(brandCounts).map(([brand, count]) => (
+          {loading && <li className="text-sm text-gray-400">Loading…</li>}
+          {!loading && Object.entries(brandCounts).map(([brand, count]) => (
             <li
               key={brand}
               onClick={() => setFilters({ ...filters, brand })}
