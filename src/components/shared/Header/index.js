@@ -7,7 +7,6 @@ export default function Header() {
     <header>
       <Container>
         <TopBar />
-        {/* <div className=' border-b-1 border-gray-200'></div> */}
         <MainNav />
       </Container>
     </header>
