@@ -67,7 +67,7 @@ export default function ContactPage() {
           </div>
         </div>
       </div>
-      <div className="mb-16 hidden md:block">
+      <div className="hidden md:block">
         <SearchBar />
       </div>
     </>

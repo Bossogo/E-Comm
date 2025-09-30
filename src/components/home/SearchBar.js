@@ -1,6 +1,6 @@
 export default function SearchBar() {
   return (
-    <div className="w-full flex justify-center py-8">
+    <div className="w-full flex justify-center py-8 mb-16">
       <div className="flex w-full max-w-md">
         <input
           type="text"
