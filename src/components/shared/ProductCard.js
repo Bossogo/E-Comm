@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useCart } from '@/context/CartContext';
+import { useFavorites } from '@/context/FavoritesContext';
 import { Heart, ShoppingCart, Star } from 'lucide-react';
 
 export default function ProductCard({
@@ -27,6 +28,8 @@ export default function ProductCard({
     isHot,
   };
   const { addToCart } = useCart();
+  const { toggleFavorite, isFavorite } = useFavorites();
+  const favorite = isFavorite(item.id);
 
   const renderStars = (raw) => {
     const max = 5;
@@ -104,11 +107,14 @@ export default function ProductCard({
           {/* Action buttons centered ONLY over the image */}
             <div className="absolute inset-0 flex items-center justify-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/0 group-hover:bg-black/20 backdrop-blur-[2px]">
             <button
-              aria-label="Add to wishlist"
-              className="p-3 rounded-full bg-black/50 hover:bg-black/70 text-white transition shadow-md focus:outline-none focus:ring-2 focus:ring-white/40"
-              onClick={(e) => e.preventDefault()}
+              aria-label={favorite ? 'Remove from favorites' : 'Add to favorites'}
+              className={`p-3 rounded-full transition shadow-md focus:outline-none focus:ring-2 focus:ring-white/40 ${favorite ? 'bg-red-500 hover:bg-red-600 text-white' : 'bg-black/50 hover:bg-black/70 text-white'}`}
+              onClick={(e) => {
+                e.preventDefault();
+                toggleFavorite(item);
+              }}
             >
-              <Heart className="w-5 h-5" />
+              <Heart className={`w-5 h-5 ${favorite ? 'fill-current' : ''}`} />
             </button>
             <button
               aria-label="Add to cart"

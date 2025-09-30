@@ -3,10 +3,8 @@
 import { useState } from 'react';
 import { useCart } from '@/context/CartContext';
 import { Minus, Plus, X } from 'lucide-react';
-import Container from '@/components/shared/Container';
-import TopBar from '@/components/shared/Header/TopBar';
-import MainNav from '@/components/shared/Header/MainNav';
 import CheckoutModal from '@/components/CheckoutModal';
+import Header from '@/components/shared/Header';
 
 export default function CartPage() {
   const { cartItems, addToCart, removeFromCart, cartTotal } = useCart();
@@ -17,10 +15,7 @@ export default function CartPage() {
 
   return (
     <>
-      <Container>
-        <TopBar />
-        <MainNav />
-      </Container>
+      <Header />
       <div className="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 lg:grid-cols-3 gap-10">
         <div className="lg:col-span-2">
           <h2 className="text-2xl font-bold mb-6">Shopping Cart</h2>

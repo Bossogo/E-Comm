@@ -3,110 +3,14 @@
 import AMR from '@/components/home/AMR';
 import { useState, useEffect, useMemo } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { HiOutlineSquares2X2, HiOutlineBars3 } from 'react-icons/hi2';
-import ProductCard from '@/components/shared/ProductCard';
 import { useFilters } from '@/context/FiltersContext';
 
-function ProductToolbar({
-  totalItems,
-  view,
-  setView,
-  showCount,
-  setShowCount,
-}) {
-  // useFilters returns { filters, setFilters }
-  const { filters, setFilters } = useFilters();
-  const { sortBy } = filters;
+import ProductDisplay from '../../components/Product/ProductDisplay';
+import ProductToolbar from '../../components/Product/ProductToolbar';
+import ProductPagination from '@/components/Product/ProductPagination';
 
-  return (
-    <div className="flex flex-col bg-brand-grey px-4 py-4 md:flex-row items-center justify-between mt-6 mb-6 gap-4">
-      <div className="text-gray-700 font-medium">{totalItems} items</div>
 
-      <div className="flex items-center gap-4">
-        <div>
-          <label className="mr-2 font-medium text-gray-700">Sort by:</label>
-          <select
-            value={sortBy}
-            onChange={(e) =>
-              setFilters((prev) => ({ ...prev, sortBy: e.target.value }))
-            }
-            className="border border-gray-300 rounded px-2 py-1"
-          >
-            <option value="default">Default</option>
-            <option value="price-low-high">Price: Low to High</option>
-            <option value="price-high-low">Price: High to Low</option>
-            <option value="rating">Rating</option>
-            <option value="newest">Newest</option>
-          </select>
-        </div>
 
-        <div>
-          <label className="mr-2 font-medium text-gray-700">Show:</label>
-          <select
-            value={showCount}
-            onChange={(e) => setShowCount(Number(e.target.value))}
-            className="border border-gray-300 rounded px-2 py-1"
-          >
-            <option value={3}>3</option>
-            <option value={6}>6</option>
-            <option value={9}>9</option>
-            <option value={12}>12</option>
-            <option value={15}>15</option>
-          </select>
-        </div>
-      </div>
-
-      <div className="ml-auto flex items-center gap-2">
-        <button
-          onClick={() => setView('grid')}
-          className={`p-2 rounded border ${
-            view === 'grid' ? 'bg-blue-500 text-white' : 'border-gray-300'
-          }`}
-        >
-          <HiOutlineSquares2X2 className="w-5 h-5" />
-        </button>
-
-        <button
-          onClick={() => setView('list')}
-          className={`p-2 rounded border ${
-            view === 'list' ? 'bg-blue-500 text-white' : 'border-gray-300'
-          }`}
-        >
-          <HiOutlineBars3 className="w-5 h-5" />
-        </button>
-      </div>
-    </div>
-  );
-}
-
-function ProductDisplay({ products, view = 'grid', currentPage, showCount }) {
-  if (!products || products.length === 0) {
-    return (
-      <div className="text-center py-10 text-gray-500">No products found.</div>
-    );
-  }
-
-  const startIndex = (currentPage - 1) * showCount;
-  const paginatedProducts = products.slice(startIndex, startIndex + showCount);
-
-  return (
-    <div>
-      {view === 'grid' ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {paginatedProducts.map((product) => (
-            <ProductCard key={product.id} product={product} layout="overlay" />
-          ))}
-        </div>
-      ) : (
-        <div className="flex flex-col gap-4">
-          {paginatedProducts.map((product) => (
-            <ProductCard key={product.id} product={product} layout="row" />
-          ))}
-        </div>
-      )}
-    </div>
-  );
-}
 
 export default function Products() {
   const [view, setView] = useState('grid');
@@ -275,25 +179,12 @@ export default function Products() {
             showCount={showCount}
           />
 
-          <div className="flex justify-center items-center gap-4 mt-6">
-            <button
-              onClick={handlePrev}
-              disabled={currentPage === 1}
-              className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50"
-            >
-              Prev
-            </button>
-            <span className="text-gray-700 font-medium">
-              Page {currentPage} of {totalPages}
-            </span>
-            <button
-              onClick={handleNext}
-              disabled={currentPage === totalPages}
-              className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50"
-            >
-              Next
-            </button>
-          </div>
+          <ProductPagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPrev={handlePrev}
+            onNext={handleNext}
+          />
         </>
       )}
     </>

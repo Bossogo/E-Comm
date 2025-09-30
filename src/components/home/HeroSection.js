@@ -54,10 +54,18 @@ export default function HeroSection() {
 
       <div className="relative -mt-20 sm:-mt-24 lg:-mt-32">
         <Container>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-            {products.map((product) => (
-              <ProductCard key={product.id} {...product} />
-            ))}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 xl:gap-8">
+            {products.map((product, idx) => {
+              const visibilityClasses =
+                idx < 2
+                  ? 'hidden sm:block'
+                  : 'hidden lg:block';
+              return (
+                <div key={product.id} className={visibilityClasses}>
+                  <ProductCard {...product} />
+                </div>
+              );
+            })}
           </div>
         </Container>
       </div>

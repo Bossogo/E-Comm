@@ -1,4 +1,5 @@
 import { HiOutlineSquares2X2, HiOutlineBars3 } from 'react-icons/hi2';
+import { useFilters } from '@/context/FiltersContext';
 
 export default function ProductToolbar({
   totalItems,
@@ -6,12 +7,12 @@ export default function ProductToolbar({
   setView,
   showCount,
   setShowCount,
-  sortBy,
-  setSortBy,
 }) {
+  const { filters, setFilters } = useFilters();
+  const { sortBy } = filters;
 
   return (
-    <div className="flex flex-col md:flex-row items-center justify-between mt-6 mb-6 gap-4">
+    <div className="flex flex-col bg-brand-grey px-4 py-4 md:flex-row items-center justify-between mt-6 mb-6 gap-4">
       <div className="text-gray-700 font-medium">{totalItems} items</div>
 
       <div className="flex items-center gap-4">
@@ -19,7 +20,9 @@ export default function ProductToolbar({
           <label className="mr-2 font-medium text-gray-700">Sort by:</label>
           <select
             value={sortBy}
-            onChange={(e) => setSortBy(e.target.value)}
+            onChange={(e) =>
+              setFilters((prev) => ({ ...prev, sortBy: e.target.value }))
+            }
             className="border border-gray-300 rounded px-2 py-1"
           >
             <option value="default">Default</option>

@@ -1,12 +1,10 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { products } from '@/app/data/products';
-import Container from '@/components/shared/Container';
-import TopBar from '@/components/shared/Header/TopBar';
-import MainNav from '@/components/shared/Header/MainNav';
 import ProductCard from '@/components/shared/ProductCard';
 import { Minus, Plus, ShoppingCart, Heart } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
+import Header from '@/components/shared/Header';
 
 export default function ProductPage({ params }) {
   const { productId } = params;
@@ -24,10 +22,7 @@ export default function ProductPage({ params }) {
   if (!product) {
     return (
       <>
-        <Container>
-          <TopBar />
-          <MainNav />
-        </Container>
+        <Header />
         <div className="p-8">
           <h1 className="text-2xl font-bold">Product not found</h1>
           <p className="text-gray-600">No product matched id: {productId}</p>
@@ -54,11 +49,7 @@ export default function ProductPage({ params }) {
 
   return (
     <>
-      <Container>
-        <TopBar />
-        <MainNav />
-      </Container>
-
+      <Header />
       <div className="p-8 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-10">
         <div>
           <img

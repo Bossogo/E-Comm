@@ -1,5 +1,7 @@
 import { Poppins } from 'next/font/google';
 import './globals.css';
+
+import { FavoritesProvider } from '@/context/FavoritesContext';
 import { CartProvider } from '@/context/CartContext';
 import { FiltersProvider } from '@/context/FiltersContext';
 import Footer from '@/components/shared/Footer/Footer';
@@ -23,10 +25,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${poppins.variable} antialiased`}>
-        <CartProvider>
-          <FiltersProvider>{children}</FiltersProvider>
-          <Footer />
-        </CartProvider>
+        <FiltersProvider>
+          <CartProvider>
+            <FavoritesProvider>{children}</FavoritesProvider>
+            <Footer />
+          </CartProvider>
+        </FiltersProvider>
       </body>
     </html>
   );

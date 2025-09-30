@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Header from '@/components/shared/Header';
 import { products } from '../data/products';
-import { FiltersProvider, useFilters } from '@/context/FiltersContext';
+import { useFilters } from '@/context/FiltersContext';
 import { useRouter } from 'next/navigation';
 
 function Sidebar() {
@@ -21,12 +21,13 @@ function Sidebar() {
   }, {});
 
   const handleClearFilters = () => {
-    setFilters({
+    setFilters(prev => ({
+      ...prev,
       hotDeal: null,
       brand: null,
       color: null,
       priceRange: [0, 200],
-    });
+    }));
     router.push('/products');
   };
 
@@ -124,7 +125,7 @@ export default function AppLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <FiltersProvider>
+    <>
       <Header onMenuClick={() => setSidebarOpen(true)} />
       <div className="bg-gray-100 mb-2 text-md flex items-center justify-center py-2">
         <span className="text-brand-blue">Home </span>&nbsp;/ Hotdeal
@@ -146,6 +147,6 @@ export default function AppLayout({ children }) {
 
         <main className="flex-1 p-4 md:p-6">{children}</main>
       </div>
-    </FiltersProvider>
+    </>
   );
 }
