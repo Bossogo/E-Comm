@@ -22,21 +22,12 @@ export default function Home() {
     <>
       <Header />
       <main>
-        {/* Hero Section */}
         <HeroSection />
-
-        {/* Best Seller */}
         <BestSellers />
-
-        {/* Adidas Sneaker */}
         <AMR />
-        {/* Why Us */}
         <GRI />
-        {/* Latest News */}
         <LatestNews />
-        {/* Featured Products */}
         <FeaturedProducts />
-        {/* Search Bar */}
         <SearchBar />
       </main>
     </>

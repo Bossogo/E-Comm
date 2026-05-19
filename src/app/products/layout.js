@@ -84,7 +84,7 @@ function Sidebar() {
         <input
           type="range"
           min={0}
-          max={200}
+          max={1000}
           value={filters.priceRange[1]}
           onChange={(e) =>
             setFilters({

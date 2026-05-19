@@ -14,7 +14,7 @@ import ProductPagination from '@/components/Product/ProductPagination';
 
 export default function Products() {
   const [view, setView] = useState('grid');
-  const [showCount, setShowCount] = useState(4);
+  const [showCount, setShowCount] = useState(9);
   const [currentPage, setCurrentPage] = useState(1);
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);

@@ -2,9 +2,10 @@
 import { useState, useEffect } from 'react';
 import { products } from '@/app/data/products';
 import ProductCard from '@/components/shared/ProductCard';
-import { Minus, Plus, ShoppingCart, Heart } from 'lucide-react';
+import { Minus, Plus, ShoppingCart, Heart, Star } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import Header from '@/components/shared/Header';
+import Image from 'next/image';
 
 export default function ProductPage({ params }) {
   const { productId } = params;
@@ -18,6 +19,21 @@ export default function ProductPage({ params }) {
       (withoutP && products.find((p) => String(p.id) === withoutP)) ||
       (withP && products.find((p) => String(p.id) === withP));
   }
+  const [selectedColor, setSelectedColor] = useState(
+    product?.colors?.[0] ?? 'default'
+  );
+  const [selectedSize, setSelectedSize] = useState('M');
+  const [quantity, setQuantity] = useState(1);
+  const [mainImage, setMainImage] = useState(product?.image ?? '');
+  const [sidebarIndex, setSidebarIndex] = useState(0);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSidebarIndex((prev) => (prev + 1) % products.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const sidebarProduct = products[sidebarIndex];
 
   if (!product) {
     return (
@@ -31,28 +47,14 @@ export default function ProductPage({ params }) {
     );
   }
 
-  const [selectedColor, setSelectedColor] = useState(
-    product.colors ? product.colors[0] : 'default'
-  );
-  const [selectedSize, setSelectedSize] = useState('M');
-  const [quantity, setQuantity] = useState(1);
-  const [mainImage, setMainImage] = useState(product.image);
-  const [sidebarIndex, setSidebarIndex] = useState(0);
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setSidebarIndex((prev) => (prev + 1) % products.length);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, []);
-
-  const sidebarProduct = products[sidebarIndex];
-
   return (
     <>
       <Header />
       <div className="p-8 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-10">
         <div>
-          <img
+          <Image
+            width={375}
+            height={271.68}
             src={mainImage}
             alt={product.title}
             className="w-full h-96 object-contain border rounded-lg mb-4"
@@ -60,8 +62,10 @@ export default function ProductPage({ params }) {
 
           <div className="flex gap-3">
             {[product.image, ...(product.gallery || [])].map((img, i) => (
-              <img
+              <Image
                 key={i}
+                width={85.79}
+                height={86.25}
                 src={img}
                 alt={`${product.title} preview ${i}`}
                 onClick={() => setMainImage(img)}
@@ -80,7 +84,7 @@ export default function ProductPage({ params }) {
           <h1 className="text-3xl font-bold mb-2">{product.title}</h1>
 
           <div className="flex items-center gap-2 mb-4">
-            <span className="text-yellow-500">⭐ {product.rating || '0'}</span>
+            <span className="text-yellow-500"><Star /> {product.rating || '0'}</span>
             <span className="text-gray-500 text-sm">
               {product.reviews || 0} reviews
             </span>

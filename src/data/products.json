@@ -33,7 +33,7 @@
     {
       "id": "p3",
       "title": "Elegant Belt",
-      "image": "/images/image Product (2).png",
+      "image": "/images/Elegant belt.png",
       "price": 35,
       "oldPrice": 50,
       "discount": 30,
@@ -48,7 +48,7 @@
     {
       "id": "p4",
       "title": "Casual Backpack",
-      "image": "/images/image Product (3).png",
+      "image": "/images/casual backpack.png",
       "price": 65,
       "rating": 4.3,
       "isHot": false,
@@ -61,7 +61,7 @@
     {
       "id": "p5",
       "title": "High Top Sneakers",
-      "image": "/images/image Product (4).png",
+      "image": "/images/image Product (5).png",
       "price": 95,
       "oldPrice": 120,
       "discount": 20,
@@ -70,13 +70,13 @@
       "hotDeal": "Nike",
       "category": "sneakers",
       "brand": "Adidas",
-      "color": "White",
+      "color": "Blue",
       "createdAt": "2025-09-05"
     },
     {
       "id": "p6",
       "title": "Fashionable Belt",
-      "image": "/images/image Product (5).png",
+      "image": "/images/Fashionable Belt.png",
       "price": 40,
       "rating": 4.1,
       "isHot": false,
@@ -89,7 +89,7 @@
     {
       "id": "p7",
       "title": "Mini Leather Bag",
-      "image": "/images/image Product (3).png",
+      "image": "/images/image Product (4).png",
       "price": 90,
       "oldPrice": 110,
       "discount": 18,
@@ -98,13 +98,13 @@
       "hotDeal": null,
       "category": "bags",
       "brand": "LeClassic",
-      "color": "Tan",
+      "color": "Red",
       "createdAt": "2025-08-01"
     },
     {
       "id": "p8",
       "title": "Sports Sneakers",
-      "image": "/images/image Product.png",
+      "image": "/images/image Product (2).png",
       "price": 70,
       "rating": 4.0,
       "isHot": false,
@@ -117,7 +117,7 @@
     {
       "id": "p9",
       "title": "Stylish Sunglasses",
-      "image": "/images/image Product (1).png",
+      "image": "/images/Stylish Sunglasses.png",
       "price": 55,
       "oldPrice": 70,
       "discount": 21,
@@ -132,7 +132,7 @@
     {
       "id": "p10",
       "title": "Aviator Sunglasses",
-      "image": "/images/image Product (2).png",
+      "image": "/images/Aviator Sunglasses.png",
       "price": 65,
       "oldPrice": 90,
       "discount": 27,
@@ -147,7 +147,7 @@
     {
       "id": "p11",
       "title": "Leather Handbag",
-      "image": "/images/image Product (2).png",
+      "image": "/images/image Product.png",
       "price": 110,
       "oldPrice": 140,
       "discount": 22,
@@ -173,6 +173,21 @@
       "brand": "Vento",
       "color": "Burgundy",
       "createdAt": "2025-02-10"
+    },
+    {
+      "id": "p13",
+      "title": "Nike Roger",
+      "image": "/images/Nike Roger.png",
+      "price": 345,
+      "oldPrice": 395,
+      "discount": 13.7,
+      "rating": 4.0,
+      "isHot": false,
+      "hotDeal": null,
+      "category": "sneakers",
+      "brand": "Nike",
+      "color": "Orange",
+      "createdAt": "2025-06-25"
     }
   ]
 }

@@ -1,7 +1,9 @@
+import Image from 'next/image';
 import Container from '../shared/Container';
 import ProductCard from '../shared/ProductCard';
 
 import React from 'react';
+import { ImageResponse } from 'next/server';
 
 export default function HeroSection() {
   const products = [
@@ -32,11 +34,13 @@ export default function HeroSection() {
   ];
 
   return (
-    <section className="relative w-full mb-16 sm:mb-24 lg:mb-32">
+    <section className="relative w-full mb-3 sm:mb-6 lg:mb-9 min-h-[250px] sm:min-h-[350px] md:min-h-[400px] lg:min-h-[500px] xl:min-h-[600px]">
       <div className="relative w-full h-[250px] sm:h-[350px] md:h-[400px] lg:h-[500px] xl:h-[600px]">
-        <img
+        <Image
           src="/images/Promotion Image.png"
           alt="Hero"
+          width={1918}
+          height={653}
           className="absolute inset-0 w-full h-full object-cover -z-10"
         />
         <Container>

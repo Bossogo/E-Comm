@@ -1,11 +1,12 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Container from '../shared/Container';
 import ProductCard from '../shared/ProductCard';
-import { products } from '@/app/data/products';
 
 function BestSellers() {
   const [visibleCount, setVisibleCount] = useState(8);
+  const [products, setProducts] = useState([]);
+  const [showingAll, setShowingAll] = useState(false);
 
   const handleLoadMore = () => {
     setVisibleCount(products.length);
@@ -14,8 +15,23 @@ function BestSellers() {
   const handleHide = () => {
     setVisibleCount(8);
   };
-
-  const showingAll = visibleCount >= products.length;
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch('/api/products');
+        const data = await response.json();
+        setProducts(data.data || data.products || data || []);
+      }
+      catch (error) {
+        console.error('Error fetching products:', error);
+      }
+    };
+    
+    fetchProducts();
+  }, []);
+  useEffect(() => {
+    setShowingAll(visibleCount >= products.length);
+  }, [visibleCount, products]);
 
   return (
     <section>
@@ -35,7 +51,7 @@ function BestSellers() {
 
       <Container>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
-          {products.slice(0, visibleCount).map((product) => (
+          {products && products.slice(0, visibleCount).map((product) => (
             <ProductCard key={product.id} {...product} />
           ))}
         </div>

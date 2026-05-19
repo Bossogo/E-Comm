@@ -23,10 +23,10 @@ export default function Topbar() {
       </div>
 
       <div className="flex items-center space-x-4 sm:space-x-6">
-        <button className="hover:text-blue-500 hidden sm:flex items-center">
+        <Link href="/favorites" className="hover:text-blue-500 hidden sm:flex items-center">
           <FaUser className="mr-1" />
           <span>My profile</span>
-        </button>
+        </Link>
 
         <Link href="/cart" className="relative cursor-pointer">
           <FaShoppingCart className="text-lg" />
